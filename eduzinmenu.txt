@@ -1,0 +1,50 @@
+-- Importar a biblioteca de GUI
+local GUI = require("GUI")
+
+-- Criar a janela
+local janela = GUI.application()
+
+-- Criar o menu
+local menu = janela:addChild(GUI.menu(1, 1, janela.width, 3, 0xE1E1E1, 0x4B4B4B, 0x3366CC, 0xFFFFFF))
+
+-- Adicionar itens ao menu
+menu:addItem("Ativar", 0x0, 0xF0F0F0, 0x3366CC)
+menu:addItem("Desativar", 0x0, 0xF0F0F0, 0x3366CC)
+
+-- Função para ativar
+local function ativar()
+  -- Coloque aqui o código para ativar
+end
+
+-- Função para desativar
+local function desativar()
+  -- Coloque aqui o código para desativar
+end
+
+-- Conectar as funções aos itens do menu
+menu.onTouch = function(_, _, menuItem)
+  if menuItem.text == "Ativar" then
+    ativar()
+  elseif menuItem.text == "Desativar" then
+    desativar()
+  end
+end
+
+-- Criar o botão "X" para minimizar o GUI
+local minimizarButton = janela:addChild(GUI.button(2, 2, 3, 1, 0xCCCCCC, 0x666666, 0xFFFFFF, 0xFFFFFF, "X"))
+
+-- Função para minimizar o GUI
+minimizarButton.onTouch = function()
+  janela:remove()
+end
+
+-- Criar o ícone do menu mod
+local icon = janela:addChild(GUI.icon(4, 2, GUI.requireImage("menu_icon.png")))
+
+-- Função para abrir o GUI ao pressionar o ícone
+icon.onTouch = function()
+  janela:draw()
+end
+
+-- Executar a janela
+janela:run()
